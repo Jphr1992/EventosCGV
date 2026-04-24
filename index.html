@@ -11,168 +11,224 @@
       background: #f0f4f8;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       min-height: 100vh;
       padding: 24px 16px;
     }
     .card {
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      padding: 28px 24px;
-      max-width: 520px;
+      border-radius: 14px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+      padding: 36px 28px;
+      max-width: 420px;
       width: 100%;
       text-align: center;
     }
-    .logo { font-size: 2rem; margin-bottom: 8px; }
-    h1 { color: #1a1a2e; font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
-    .subtitle { color: #666; font-size: 0.88rem; margin-bottom: 20px; }
-    .form-wrap { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
-    iframe { width: 100%; height: 560px; border: none; display: block; }
-    .acceso-box {
-      margin-top: 20px;
-      padding: 16px;
-      background: #f8fafc;
-      border-radius: 8px;
-      border: 1px solid #e2e8f0;
-    }
-    .estado {
-      font-size: 0.85rem;
-      color: #e07b00;
-      margin-bottom: 12px;
+
+    /* --- PASO 1 --- */
+    #paso1 { display: block; }
+    #paso2 { display: none; }
+    #paso3 { display: none; }
+
+    .icono { font-size: 3rem; margin-bottom: 12px; }
+    h1 { color: #1a1a2e; font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; }
+    .desc { color: #555; font-size: 0.9rem; line-height: 1.5; margin-bottom: 28px; }
+
+    .pasos {
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
+      margin-bottom: 28px;
     }
-    .estado.ok { color: #107c41; font-weight: 600; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: #e07b00; flex-shrink: 0; }
-    .dot.ok { background: #107c41; }
-    .btn {
-      display: inline-block;
+    .paso-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+    }
+    .paso-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .paso-num.activo { background: #0078d4; color: white; }
+    .paso-num.done   { background: #107c41; color: white; }
+    .paso-lbl { font-size: 0.7rem; color: #94a3b8; }
+    .paso-lbl.activo { color: #0078d4; font-weight: 600; }
+    .paso-lbl.done   { color: #107c41; }
+    .linea { width: 100%; height: 2px; background: #e2e8f0; margin-top: 13px; flex: 0.3; }
+    .linea.done { background: #107c41; }
+
+    .btn-primario {
+      display: block;
       width: 100%;
-      padding: 13px;
+      padding: 14px;
       border-radius: 8px;
       font-weight: 700;
       font-size: 1rem;
       border: none;
-      background: #cbd5e1;
-      color: #94a3b8;
-      cursor: not-allowed;
-      pointer-events: none;
-      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+      background: #0078d4;
+      color: white;
+      cursor: pointer;
       text-decoration: none;
+      transition: background 0.2s;
     }
-    .btn.activo {
+    .btn-primario:hover { background: #005fa3; }
+
+    .btn-verde {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
       background: #107c41;
       color: white;
       cursor: pointer;
-      pointer-events: all;
-      box-shadow: 0 4px 14px rgba(16,124,65,0.35);
+      text-decoration: none;
+      transition: background 0.2s;
     }
-    .btn.activo:hover { background: #0a5c30; }
-    .footer { font-size: 0.75rem; color: #aaa; margin-top: 16px; }
-    .manual-wrap { display: none; margin-top: 10px; }
-    .manual-wrap.visible { display: block; }
-    .btn-manual {
-      font-size: 0.78rem;
-      color: #888;
-      background: none;
-      border: none;
+    .btn-verde:hover { background: #0a5c30; }
+
+    .btn-secundario {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1.5px solid #0078d4;
+      background: white;
+      color: #0078d4;
       cursor: pointer;
-      text-decoration: underline;
+      margin-top: 10px;
+      transition: background 0.2s;
     }
+    .btn-secundario:hover { background: #f0f7ff; }
+
+    .alert-box {
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.85rem;
+      color: #7a5800;
+      margin-bottom: 20px;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .alert-box strong { display: block; margin-bottom: 4px; }
+
+    .check-grande { font-size: 3.5rem; margin-bottom: 12px; }
+    .footer { font-size: 0.74rem; color: #bbb; margin-top: 20px; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="logo">📶</div>
+<div class="card">
+
+  <!-- PASO 1: Bienvenida -->
+  <div id="paso1">
+    <div class="icono">📶</div>
     <h1>Bienvenido a EventosCGV</h1>
-    <p class="subtitle">Completa tu registro para acceder a internet. Solo toma un momento.</p>
+    <p class="desc">Para acceder a internet necesitas completar un breve registro. Solo toma un momento.</p>
 
-    <div class="form-wrap">
-      <iframe
-        id="miForm"
-        src="https://forms.office.com/Pages/ResponsePage.aspx?id=XXi46T4yNE21YS7C_h8W73M_62pgFixPu7DXrTIFNHFUNDFRNks0VkREVVpVWFVZUzBTRTU3NUkwOS4u"
-        title="Registro de visitantes"
-      ></iframe>
-    </div>
-
-    <div class="acceso-box">
-      <div class="estado" id="estadoMsg">
-        <span class="dot" id="dot"></span>
-        <span id="estadoTxt">Completa el formulario para habilitar el acceso</span>
+    <div class="pasos">
+      <div class="paso-item">
+        <div class="paso-num activo">1</div>
+        <div class="paso-lbl activo">Registro</div>
       </div>
-      <a class="btn" id="btnAcceso" href="#">Acceder a internet</a>
-
-      <div class="manual-wrap" id="manualWrap">
-        <button class="btn-manual" onclick="habilitarBoton()">
-          Ya envié el formulario — habilitar acceso manualmente
-        </button>
+      <div class="linea" id="linea1"></div>
+      <div class="paso-item">
+        <div class="paso-num" id="num2">2</div>
+        <div class="paso-lbl" id="lbl2">Confirmar</div>
+      </div>
+      <div class="linea" id="linea2"></div>
+      <div class="paso-item">
+        <div class="paso-num" id="num3">3</div>
+        <div class="paso-lbl" id="lbl3">Acceder</div>
       </div>
     </div>
 
-    <p class="footer">Tu información es confidencial y solo se usará para este evento.</p>
+    <button class="btn-primario" onclick="abrirFormulario()">
+      📋 Ir al formulario de registro
+    </button>
+    <p class="footer">Se abrirá en una nueva pestaña</p>
   </div>
 
-  <script>
-    const btn    = document.getElementById('btnAcceso');
-    const msg    = document.getElementById('estadoMsg');
-    const txt    = document.getElementById('estadoTxt');
-    const iframe = document.getElementById('miForm');
-    let desbloqueado = false;
+  <!-- PASO 2: Confirmar envío -->
+  <div id="paso2">
+    <div class="icono">📝</div>
+    <h1>¿Ya enviaste el formulario?</h1>
 
-    function habilitarBoton() {
-      if (desbloqueado) return;
-      desbloqueado = true;
-      clearInterval(detector);
-      btn.classList.add('activo');
-      btn.href = 'http://www.msftconnecttest.com/redirect';
-      txt.textContent = 'Registro completado — ya puedes acceder';
-      msg.classList.add('ok');
-      document.getElementById('dot').classList.add('ok');
-      document.getElementById('manualWrap').classList.remove('visible');
-    }
+    <div class="alert-box">
+      <strong>⚠️ Importante</strong>
+      Asegúrate de haber presionado <strong>"Enviar"</strong> en el formulario y que hayas visto el mensaje <em>"La respuesta se ha enviado"</em>.
+    </div>
 
-    // Método 1: postMessage desde Microsoft Forms
-    window.addEventListener('message', function(e) {
-      if (!e.origin) return;
-      if (e.origin.includes('microsoft.com') || e.origin.includes('office.com')) {
-        habilitarBoton();
-      }
-    });
+    <button class="btn-verde" onclick="confirmarEnvio()">
+      ✅ Sí, ya lo envié — continuar
+    </button>
+    <button class="btn-secundario" onclick="abrirFormulario()">
+      🔄 Volver al formulario
+    </button>
+    <p class="footer">Tu información quedará guardada en el sistema</p>
+  </div>
 
-    // Método 2: polling cada segundo — intenta leer el texto del iframe
-    const detector = setInterval(function() {
-      try {
-        const iframeDoc = iframe.contentWindow.document;
-        const bodyText  = iframeDoc.body ? iframeDoc.body.innerText : '';
-        const titleText = iframeDoc.title || '';
-        const textoCompleto = (bodyText + ' ' + titleText).toLowerCase();
+  <!-- PASO 3: Acceso habilitado -->
+  <div id="paso3">
+    <div class="check-grande">✅</div>
+    <h1>¡Registro completado!</h1>
+    <p class="desc">Tu acceso a internet ha sido habilitado. Haz clic para empezar a navegar.</p>
 
-        const palabras = [
-          'respuesta se ha enviado',
-          'response was submitted',
-          'gracias',
-          'thank you',
-          'enviado',
-          'submitted'
-        ];
+    <a class="btn-verde" id="btnNavegar" href="http://www.msftconnecttest.com/redirect">
+      🌐 Acceder a internet
+    </a>
+    <p class="footer">Bienvenido al evento — disfruta la conexión</p>
+  </div>
 
-        if (palabras.some(p => textoCompleto.includes(p))) {
-          habilitarBoton();
-        }
-      } catch(e) {
-        // Cross-origin bloqueado — el método 1 cubre este caso
-      }
-    }, 1000);
+</div>
 
-    // Método 3: botón manual de respaldo tras 90 segundos
+<script>
+  const FORMS_URL = 'https://forms.office.com/Pages/ResponsePage.aspx?id=XXi46T4yNE21YS7C_h8W73M_62pgFixPu7DXrTIFNHFUNDFRNks0VkREVVpVWFVZUzBTRTU3NUkwOS4u';
+
+  function abrirFormulario() {
+    window.open(FORMS_URL, '_blank');
+    // Después de 3s pasar al paso 2
     setTimeout(function() {
-      if (!desbloqueado) {
-        document.getElementById('manualWrap').classList.add('visible');
-      }
-    }, 90000);
-  </script>
+      mostrarPaso(2);
+    }, 3000);
+  }
+
+  function confirmarEnvio() {
+    mostrarPaso(3);
+  }
+
+  function mostrarPaso(n) {
+    document.getElementById('paso1').style.display = 'none';
+    document.getElementById('paso2').style.display = 'none';
+    document.getElementById('paso3').style.display = 'none';
+    document.getElementById('paso' + n).style.display = 'block';
+
+    // Actualizar indicadores
+    if (n >= 2) {
+      document.getElementById('num2').className = 'paso-num activo';
+      document.getElementById('lbl2').className = 'paso-lbl activo';
+      document.getElementById('linea1').className = 'linea done';
+    }
+    if (n >= 3) {
+      document.getElementById('num2').className = 'paso-num done';
+      document.getElementById('lbl2').className = 'paso-lbl done';
+      document.getElementById('num3').className = 'paso-num activo';
+      document.getElementById('lbl3').className = 'paso-lbl activo';
+      document.getElementById('linea2').className = 'linea done';
+    }
+  }
+</script>
 </body>
 </html>
