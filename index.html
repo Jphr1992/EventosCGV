@@ -253,8 +253,9 @@ button{
                     Presiona el botón para comenzar a navegar.
                 </p>
 
-                <a class="btn-success"
-   href="$MERAKI:AUTH_AND_CONTINUE_URL$"
+                <a id="btnInternet"
+   class="btn-success"
+   href="#"
    style="
       display:block;
       text-decoration:none;
@@ -295,6 +296,43 @@ function registroCompletado(){
 }
 
 </script>
+<script>
 
+function registroCompletado(){
+
+    document.getElementById('paso1').style.display='none';
+    document.getElementById('paso2').style.display='block';
+
+    construirURLMeraki();
+
+}
+
+function construirURLMeraki(){
+
+    const params = new URLSearchParams(window.location.search);
+
+    const baseGrantUrl = params.get("base_grant_url");
+    const userContinueUrl = params.get("user_continue_url");
+
+    if(baseGrantUrl){
+
+        let finalUrl = baseGrantUrl;
+
+        if(userContinueUrl){
+            finalUrl += "?continue_url=" + encodeURIComponent(userContinueUrl);
+        }
+
+        document.getElementById("btnInternet").href = finalUrl;
+
+    }else{
+
+        // Modo prueba fuera de Meraki
+        document.getElementById("btnInternet").href = "https://www.google.com";
+
+    }
+
+}
+
+</script>
 </body>
 </html>
