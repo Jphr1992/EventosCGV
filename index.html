@@ -253,18 +253,18 @@ button{
                     Presiona el botón para comenzar a navegar.
                 </p>
 
-                <form method="GET" action="$MERAKI:BASEGRANTURL$">
-
-                    <input
-                        type="hidden"
-                        name="continue_url"
-                        value="https://www.google.com">
-
-                    <button class="btn-success" type="submit">
-                        🌐 Acceder a Internet
-                    </button>
-
-                </form>
+                <a class="btn-success"
+   href="$MERAKI:AUTH_AND_CONTINUE_URL$"
+   style="
+      display:block;
+      text-decoration:none;
+      text-align:center;
+      padding:15px;
+      border-radius:10px;
+      font-weight:700;
+   ">
+   🌐 Acceder a Internet
+</a>
 
             </div>
 
