@@ -1,234 +1,300 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenido — EventosCGV</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f4f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 24px 16px;
-    }
-    .card {
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
-      padding: 36px 28px;
-      max-width: 420px;
-      width: 100%;
-      text-align: center;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Acceso WiFi - EventosCGV</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f3f6fb;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:900px;
+    background:white;
+    border-radius:18px;
+    box-shadow:0 10px 35px rgba(0,0,0,.12);
+    overflow:hidden;
+}
+
+.header{
+    background:linear-gradient(135deg,#0078d4,#005ea6);
+    color:white;
+    padding:30px;
+    text-align:center;
+}
+
+.header h1{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.header p{
+    opacity:.95;
+    font-size:1rem;
+}
+
+.content{
+    padding:25px;
+}
+
+.steps{
+    display:flex;
+    justify-content:center;
+    margin-bottom:25px;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.step{
+    background:#e8eef7;
+    color:#6b7280;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:.9rem;
+    font-weight:600;
+}
+
+.step.active{
+    background:#0078d4;
+    color:white;
+}
+
+.step.done{
+    background:#107c41;
+    color:white;
+}
+
+.info-box{
+    background:#fff8e1;
+    border:1px solid #ffe082;
+    color:#7a5800;
+    border-radius:10px;
+    padding:16px;
+    margin-bottom:20px;
+    line-height:1.5;
+}
+
+.form-container{
+    width:100%;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid #dbe3ef;
+}
+
+iframe{
+    width:100%;
+    height:70vh;
+    border:none;
+}
+
+.actions{
+    margin-top:20px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+button{
+    flex:1;
+    min-width:220px;
+    border:none;
+    border-radius:10px;
+    padding:15px;
+    font-size:1rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn-primary{
+    background:#0078d4;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#0062ad;
+}
+
+.btn-success{
+    background:#107c41;
+    color:white;
+}
+
+.btn-success:hover{
+    background:#0d6435;
+}
+
+.success{
+    text-align:center;
+    padding:20px;
+}
+
+.success .icon{
+    font-size:4rem;
+    margin-bottom:15px;
+}
+
+.success h2{
+    margin-bottom:10px;
+    color:#111827;
+}
+
+.success p{
+    color:#6b7280;
+    margin-bottom:25px;
+}
+
+.footer{
+    text-align:center;
+    color:#9ca3af;
+    font-size:.8rem;
+    margin-top:20px;
+}
+
+@media(max-width:768px){
+
+    .header h1{
+        font-size:1.5rem;
     }
 
-    /* --- PASO 1 --- */
-    #paso1 { display: block; }
-    #paso2 { display: none; }
-    #paso3 { display: none; }
-
-    .icono { font-size: 3rem; margin-bottom: 12px; }
-    h1 { color: #1a1a2e; font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; }
-    .desc { color: #555; font-size: 0.9rem; line-height: 1.5; margin-bottom: 28px; }
-
-    .pasos {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 28px;
+    iframe{
+        height:65vh;
     }
-    .paso-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      flex: 1;
-    }
-    .paso-num {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: #e2e8f0;
-      color: #94a3b8;
-      font-size: 0.8rem;
-      font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .paso-num.activo { background: #0078d4; color: white; }
-    .paso-num.done   { background: #107c41; color: white; }
-    .paso-lbl { font-size: 0.7rem; color: #94a3b8; }
-    .paso-lbl.activo { color: #0078d4; font-weight: 600; }
-    .paso-lbl.done   { color: #107c41; }
-    .linea { width: 100%; height: 2px; background: #e2e8f0; margin-top: 13px; flex: 0.3; }
-    .linea.done { background: #107c41; }
 
-    .btn-primario {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1rem;
-      border: none;
-      background: #0078d4;
-      color: white;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
+    .actions{
+        flex-direction:column;
     }
-    .btn-primario:hover { background: #005fa3; }
 
-    .btn-verde {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1rem;
-      border: none;
-      background: #107c41;
-      color: white;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
+    button{
+        width:100%;
     }
-    .btn-verde:hover { background: #0a5c30; }
 
-    .btn-secundario {
-      display: block;
-      width: 100%;
-      padding: 11px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      border: 1.5px solid #0078d4;
-      background: white;
-      color: #0078d4;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background 0.2s;
-    }
-    .btn-secundario:hover { background: #f0f7ff; }
+}
 
-    .alert-box {
-      background: #fff8e1;
-      border: 1px solid #ffe082;
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 0.85rem;
-      color: #7a5800;
-      margin-bottom: 20px;
-      text-align: left;
-      line-height: 1.5;
-    }
-    .alert-box strong { display: block; margin-bottom: 4px; }
-
-    .check-grande { font-size: 3.5rem; margin-bottom: 12px; }
-    .footer { font-size: 0.74rem; color: #bbb; margin-top: 20px; }
-  </style>
+</style>
 </head>
+
 <body>
+
 <div class="card">
 
-  <!-- PASO 1: Bienvenida -->
-  <div id="paso1">
-    <div class="icono">📶</div>
-    <h1>Bienvenido a EventosCGV</h1>
-    <p class="desc">Para acceder a internet necesitas completar un breve registro. Solo toma un momento.</p>
-
-    <div class="pasos">
-      <div class="paso-item">
-        <div class="paso-num activo">1</div>
-        <div class="paso-lbl activo">Registro</div>
-      </div>
-      <div class="linea" id="linea1"></div>
-      <div class="paso-item">
-        <div class="paso-num" id="num2">2</div>
-        <div class="paso-lbl" id="lbl2">Confirmar</div>
-      </div>
-      <div class="linea" id="linea2"></div>
-      <div class="paso-item">
-        <div class="paso-num" id="num3">3</div>
-        <div class="paso-lbl" id="lbl3">Acceder</div>
-      </div>
+    <div class="header">
+        <h1>📶 Bienvenido a EventosCGV</h1>
+        <p>Completa el registro para acceder a internet</p>
     </div>
 
-    <button class="btn-primario" onclick="abrirFormulario()">
-      📋 Ir al formulario de registro
-    </button>
-    <p class="footer">Se abrirá en una nueva pestaña</p>
-  </div>
+    <div class="content">
 
-  <!-- PASO 2: Confirmar envío -->
-  <div id="paso2">
-    <div class="icono">📝</div>
-    <h1>¿Ya enviaste el formulario?</h1>
+        <div class="steps">
+            <div class="step active" id="step1">1. Registro</div>
+            <div class="step" id="step2">2. Confirmar</div>
+            <div class="step" id="step3">3. Acceso</div>
+        </div>
 
-    <div class="alert-box">
-      <strong>⚠️ Importante</strong>
-      Asegúrate de haber presionado <strong>"Enviar"</strong> en el formulario y que hayas visto el mensaje <em>"La respuesta se ha enviado"</em>.
+        <!-- PASO 1 -->
+        <div id="paso1">
+
+            <div class="info-box">
+                <strong>Importante:</strong><br>
+                Completa el formulario de registro y posteriormente presiona el botón
+                <strong>"Ya completé el registro"</strong>.
+            </div>
+
+            <div class="form-container">
+
+                <iframe
+                    src="https://forms.office.com/Pages/ResponsePage.aspx?id=XXi46T4yNE21YS7C_h8W73M_62pgFixPu7DXrTIFNHFUNDFRNks0VkREVVpVWFVZUzBTRTU3NUkwOS4u&embed=true"
+                    allowfullscreen
+                    webkitallowfullscreen
+                    mozallowfullscreen
+                    msallowfullscreen>
+                </iframe>
+
+            </div>
+
+            <div class="actions">
+
+                <button class="btn-primary" onclick="registroCompletado()">
+                    ✅ Ya completé el registro
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- PASO 2 -->
+        <div id="paso2" style="display:none;">
+
+            <div class="success">
+
+                <div class="icon">🎉</div>
+
+                <h2>¡Registro completado!</h2>
+
+                <p>
+                    Tu acceso a internet ya está listo.
+                    Presiona el botón para comenzar a navegar.
+                </p>
+
+                <form method="GET" action="$MERAKI:BASEGRANTURL$">
+
+                    <input
+                        type="hidden"
+                        name="continue_url"
+                        value="https://www.google.com">
+
+                    <button class="btn-success" type="submit">
+                        🌐 Acceder a Internet
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="footer">
+            EventosCGV © WiFi Guest Access
+        </div>
+
     </div>
-
-    <button class="btn-verde" onclick="confirmarEnvio()">
-      ✅ Sí, ya lo envié — continuar
-    </button>
-    <button class="btn-secundario" onclick="abrirFormulario()">
-      🔄 Volver al formulario
-    </button>
-    <p class="footer">Tu información quedará guardada en el sistema</p>
-  </div>
-
-  <!-- PASO 3: Acceso habilitado -->
-  <div id="paso3">
-    <div class="check-grande">✅</div>
-    <h1>¡Registro completado!</h1>
-    <p class="desc">Tu acceso a internet ha sido habilitado. Haz clic para empezar a navegar.</p>
-
-    <a class="btn-verde" id="btnNavegar" href="https://www.google.com">
-      🌐 Acceder a internet
-    </a>
-    <p class="footer">Bienvenido al evento — disfruta la conexión</p>
-  </div>
 
 </div>
 
 <script>
-  const FORMS_URL = 'https://forms.office.com/Pages/ResponsePage.aspx?id=XXi46T4yNE21YS7C_h8W73M_62pgFixPu7DXrTIFNHFUNDFRNks0VkREVVpVWFVZUzBTRTU3NUkwOS4u';
 
-  function abrirFormulario() {
-    window.open(FORMS_URL, '_blank');
-    // Después de 3s pasar al paso 2
-    setTimeout(function() {
-      mostrarPaso(2);
-    }, 3000);
-  }
+function registroCompletado(){
 
-  function confirmarEnvio() {
-    mostrarPaso(3);
-  }
+    document.getElementById('paso1').style.display='none';
+    document.getElementById('paso2').style.display='block';
 
-  function mostrarPaso(n) {
-    document.getElementById('paso1').style.display = 'none';
-    document.getElementById('paso2').style.display = 'none';
-    document.getElementById('paso3').style.display = 'none';
-    document.getElementById('paso' + n).style.display = 'block';
+    document.getElementById('step1').classList.remove('active');
+    document.getElementById('step1').classList.add('done');
 
-    // Actualizar indicadores
-    if (n >= 2) {
-      document.getElementById('num2').className = 'paso-num activo';
-      document.getElementById('lbl2').className = 'paso-lbl activo';
-      document.getElementById('linea1').className = 'linea done';
-    }
-    if (n >= 3) {
-      document.getElementById('num2').className = 'paso-num done';
-      document.getElementById('lbl2').className = 'paso-lbl done';
-      document.getElementById('num3').className = 'paso-num activo';
-      document.getElementById('lbl3').className = 'paso-lbl activo';
-      document.getElementById('linea2').className = 'linea done';
-    }
-  }
+    document.getElementById('step2').classList.add('done');
+
+    document.getElementById('step3').classList.add('active');
+
+}
+
 </script>
+
 </body>
 </html>
